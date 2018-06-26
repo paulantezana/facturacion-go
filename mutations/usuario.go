@@ -1,12 +1,13 @@
 package mutations
 
 import (
+	"crypto/md5"
+	"crypto/sha256"
+	"fmt"
+
 	"github.com/graphql-go/graphql"
+	"github.com/paulantezana/facturacion-go/config"
 	"github.com/paulantezana/facturacion-go/models"
-    "github.com/paulantezana/facturacion-go/config"
-    "crypto/sha256"
-    "fmt"
-    "crypto/md5"
 )
 
 func CreateUsuarioMutation() *graphql.Field {
@@ -27,9 +28,9 @@ func CreateUsuarioMutation() *graphql.Field {
 			}
 
 			// Get Avatar from gravatar
-            picmd5 := md5.Sum([]byte(usuario.Email))
-            picstr := fmt.Sprintf("%x", picmd5)
-            usuario.Avatar = "https://gravatar.com/avatar/" + picstr + "?s=100"
+			picmd5 := md5.Sum([]byte(usuario.Email))
+			picstr := fmt.Sprintf("%x", picmd5)
+			usuario.Avatar = "https://gravatar.com/avatar/" + picstr + "?s=100"
 
 			// get connection
 			db := config.GetConnection()
@@ -40,7 +41,7 @@ func CreateUsuarioMutation() *graphql.Field {
 			usuario.Clave = pwd
 
 			if err := db.Create(&usuario).Error; err != nil {
-			   return nil, err
+				return nil, err
 			}
 
 			return usuario, nil

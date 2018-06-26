@@ -3,15 +3,16 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
+	"net/http"
+	"os"
+
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/mnmtanish/go-graphiql"
 	"github.com/paulantezana/facturacion-go/config"
 	"github.com/paulantezana/facturacion-go/models"
 	"github.com/paulantezana/facturacion-go/schema"
-	"log"
-	"net/http"
-	"os"
 )
 
 func main() {
@@ -33,6 +34,9 @@ func main() {
 	if port == "" {
 		port = config.GetConfig().Server.Port
 	}
+
+	//Static file server
+	router.PathPrefix("/").Handler(http.FileServer(http.Dir("public")))
 
 	//router.HandleFunc("/login",security.Login).Methods("POST")
 	router.Handle("/graphql", schema.GraphQL())            // GraphQL Server

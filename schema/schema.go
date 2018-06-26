@@ -1,9 +1,10 @@
 package schema
 
 import (
+	"net/http"
+
 	"github.com/graphql-go/graphql"
 	"github.com/graphql-go/handler"
-	"net/http"
 )
 
 func GraphQL() http.Handler {

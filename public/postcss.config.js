@@ -1,0 +1,12 @@
+module.exports = {
+    plugins: {
+        'autoprefixer': {
+            'browsers'  : 'last 2 versions',
+            'grid'      : true
+        },
+        'cssnano': {
+            'preset': 'advanced',
+        },
+        'postcss-cssnext': {},
+    }
+}

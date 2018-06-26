@@ -2,10 +2,11 @@ package config
 
 import (
 	"fmt"
-	"github.com/jinzhu/gorm"
-	_ "github.com/lib/pq"
 	"log"
 	"os"
+
+	"github.com/jinzhu/gorm"
+	_ "github.com/lib/pq"
 )
 
 // GetConnection get connection database
