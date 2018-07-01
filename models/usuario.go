@@ -30,7 +30,7 @@ var UsuarioType = graphql.NewObject(
 			"updated_at": &graphql.Field{Type: graphql.DateTime},
 			"deleted_at": &graphql.Field{Type: graphql.DateTime},
 			"usuario":    &graphql.Field{Type: graphql.String},
-            "email":    &graphql.Field{Type: graphql.String},
+			"email":      &graphql.Field{Type: graphql.String},
 			"nombre":     &graphql.Field{Type: graphql.String},
 			"avatar":     &graphql.Field{Type: graphql.String},
 			"clave":      &graphql.Field{Type: graphql.String},

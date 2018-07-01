@@ -1,6 +1,9 @@
 package models
 
-import "time"
+import (
+    "time"
+    "github.com/graphql-go/graphql"
+)
 
 type Auditoria struct {
 	ID        uint       `json:"id" gorm:"primary_key"`
@@ -14,3 +17,20 @@ type Auditoria struct {
 	Nuevo     string     `json:"nuevo"`
 	UsuarioID uint       `json:"usuario_id"`
 }
+
+var AuditoriaType = graphql.NewObject(
+    graphql.ObjectConfig{
+        Name: "Auditoria",
+        Fields: graphql.Fields{
+            "id":           &graphql.Field{Type: graphql.Int},
+            "created_at":   &graphql.Field{Type: graphql.DateTime},
+            "updated_at":   &graphql.Field{Type: graphql.DateTime},
+            "deleted_at":   &graphql.Field{Type: graphql.DateTime},
+            "fecha":        &graphql.Field{Type: graphql.DateTime},
+            "accion": &graphql.Field{Type: graphql.String},
+            "tabla":  &graphql.Field{Type: graphql.String},
+            "anterior":     &graphql.Field{Type: graphql.String},
+            "nuevo":        &graphql.Field{Type: graphql.String},
+        },
+    },
+)

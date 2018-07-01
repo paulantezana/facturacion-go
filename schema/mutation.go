@@ -8,5 +8,15 @@ import (
 func RootMutation() graphql.Fields {
 	return graphql.Fields{
 		"CreateUsuario": mutations.CreateUsuarioMutation(),
+		"UpdateUsuario": mutations.UpdateUsuarioMutation(),
+		"DeleteUsuario": mutations.DeleteUsuarioMutation(),
+
+		"CreateProducto": mutations.CreateProductoMutation(),
+		"UpdateProducto": mutations.UpdateProductoMutation(),
+		"DeleteProducto": mutations.DeleteProductoMutation(),
+
+		"CreateTercero": mutations.CreateTerceroMutation(),
+		"UpdateTercero": mutations.UpdateTerceroMutation(),
+		"DeleteTercero": mutations.DeleteTerceroMutation(),
 	}
 }

@@ -13,6 +13,7 @@ import (
 	"github.com/paulantezana/facturacion-go/config"
 	"github.com/paulantezana/facturacion-go/models"
 	"github.com/paulantezana/facturacion-go/schema"
+    "github.com/paulantezana/facturacion-go/security"
 )
 
 func main() {
@@ -36,9 +37,9 @@ func main() {
 	}
 
 	//Static file server
-	router.PathPrefix("/").Handler(http.FileServer(http.Dir("public")))
+	//router.PathPrefix("/").Handler(http.FileServer(http.Dir("public")))
 
-	//router.HandleFunc("/login",security.Login).Methods("POST")
+	router.HandleFunc("/login",security.Login).Methods("POST")
 	router.Handle("/graphql", schema.GraphQL())            // GraphQL Server
 	router.HandleFunc("/graphiql", graphiql.ServeGraphiQL) // GraphiQL Server
 

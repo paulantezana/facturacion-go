@@ -5,6 +5,7 @@ import (
 	"crypto/sha256"
 	"fmt"
 
+	"errors"
 	"github.com/graphql-go/graphql"
 	"github.com/paulantezana/facturacion-go/config"
 	"github.com/paulantezana/facturacion-go/models"
@@ -45,6 +46,50 @@ func CreateUsuarioMutation() *graphql.Field {
 			}
 
 			return usuario, nil
+		},
+	}
+}
+
+// UpdateUsuarioMutation update registers
+func UpdateUsuarioMutation() *graphql.Field {
+	return &graphql.Field{
+		Type: models.UsuarioType,
+		Args: graphql.FieldConfigArgument{},
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			usuario := models.Usuario{
+				ID: uint(p.Args["id"].(int)),
+			}
+			return usuario, nil
+		},
+	}
+}
+
+// DeleteUsuarioMutation : delete register
+func DeleteUsuarioMutation() *graphql.Field {
+	return &graphql.Field{
+		Type: models.UsuarioType,
+		Args: graphql.FieldConfigArgument{
+			"id": &graphql.ArgumentConfig{Type: graphql.NewNonNull(graphql.Int)},
+		},
+		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+			user := models.Usuario{
+				ID: uint(p.Args["id"].(int)),
+			}
+
+			// get connection
+			db := config.GetConnection()
+			defer db.Close()
+
+			if db.First(&user).RecordNotFound() {
+				return nil, errors.New(fmt.Sprintf("The record with the id %d was not found", user.ID))
+			}
+
+			// Execute operations
+			if err := db.Delete(&user).Error; err != nil {
+				return nil, err
+			}
+
+			return user, nil
 		},
 	}
 }

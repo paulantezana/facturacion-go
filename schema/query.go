@@ -7,6 +7,11 @@ import (
 
 func RootQuery() graphql.Fields {
 	return graphql.Fields{
+        "Auditorias": queries.AuditoriaQuery(),
+        "Compras": queries.CompraQuery(),
+        "Productos": queries.ProdutoQuery(),
+        "Terceros": queries.TerceroQuery(),
 		"Usuarios": queries.UsuarioQuery(),
+        "Ventas": queries.VentaQuery(),
 	}
 }
