@@ -26,7 +26,7 @@ var ProductoType = graphql.NewObject(
 			"created_at": &graphql.Field{Type: graphql.DateTime},
 			"updated_at": &graphql.Field{Type: graphql.DateTime},
 			"deleted_at": &graphql.Field{Type: graphql.DateTime},
-			"nombre":     &graphql.Field{Type: graphql.DateTime},
+			"nombre":     &graphql.Field{Type: graphql.String},
 			"cantidad":   &graphql.Field{Type: graphql.Int},
 			"precio":     &graphql.Field{Type: graphql.Int},
 		},
